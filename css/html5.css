@@ -1,0 +1,46 @@
+@charset 'UTF-8'
+*{margin:0;padding:0; font-size:12px;line-height:15px;color:#000;}
+.clearfix{border:0;clear:both;}
+img{border:0px;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, a, p, blockquote, th, td {
+margin: 0;
+padding: 0;
+vertical-align: baseline;
+}
+address,caption,cite,code,dfn,em,var{font-style:normal;font-weight:normal;}
+ol, ul, li,dl,dt,dd {margin:0;padding:0;list-style: none outside none;/*outside凸排*/}
+h1,h2,h3,h4,h5,h6{font-size:100%;margin:0;padding:0;}
+input{border:none;}
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+display: block;
+}
+a:link,a:visited{text-decoration:none;}
+a:hover{text-decoration:underline;}
+#mshead{position:relative;min-width:1000px;height:556px;background: url("../images/header.jpg") 0 0 no-repeat;}
+.bloque-one{position:relative;min-width:1000px;height:1200px;background: url("../images/bloque1.jpg") 0 0 no-repeat;overflow: hidden;}
+.bloque-two{position:relative;min-width:1000px;height:1213px;background: url("../images/placa.jpg") 0 0 no-repeat;overflow: hidden;}
+.espanol{position:absolute;top:0;left:30%;width: 76px;height: 65px;background: url("../images/lang.png") 0 0 no-repeat;}
+.espanol h2{color:#fff;text-align: center;margin-top: 10px;}
+.iutopi{position: absolute;top:13%;left:194px;width:194px;height:108px;background: url("../images/iutopi-logo.png") 0 0 no-repeat;}
+.specal{position: absolute;top:0;right:0;width:67px;height:107px;background: url("../images/awwwards_honorable_green_right.png") 0 0 no-repeat;}
+.csswinner{position: absolute;top:108px;right:0;width:81px;height:62px;background: url("../images/winner-brown-right.png") 0 0 no-repeat;}
+.cssDa{position: absolute;top:31%;right:0;width:68px;height:98px;background: url("../images/cssda.png") 0 0 no-repeat;}
+#masthod{position: absolute;top: 0;left: 100px;width: 100px;height:1200px;background: url("../images/canio.png") 0 0 no-repeat;}
+#bg1{position: absolute;top: 0;left: 0;width: 1920px;height:1600px;background: url("../images/capa1a.png")90% 340px no-repeat fixed;}
+#bg2{position: absolute;top: 0;left: 0;width:1920px;height:1600px;background: url("../images/capa1b.png") 40% 243px no-repeat fixed;}
+#bg3{position: absolute;top: 0;left: 0;width:1920px;height:1600px;background: url("../images/capa1cb.png") 20% 205px no-repeat fixed;}
+#bg4{position: absolute;top: 0;left: 0;width: 1920px;height:1600px;background: url("../images/capa1db.png") 40% 223px no-repeat fixed;}
+#bg5{position: absolute;top: 0;left: 0;width: 1920px;height:1600px;background: url("../images/capa1eb.png") 56% 135px no-repeat fixed;}
+#bg6{position: absolute;top: 0;left: 0;width: 1920px;height:1600px;background: url("../images/capa1fb.png") 80% 142px no-repeat fixed;}
+.bloque-one article,.bloque-two article{width: 900px;margin: 0 auto;min-height: 100%;position: relative;}
+#counter{position: relative;top: 58%;left: 50%;margin-left: -80px;height: 50px;width: 200px;font-family: 'Cabin', arial, serif;font-size: 14px;color: #333;}
+
+#bgt1{position: absolute;top: 0;left: 0;width: 1920px;height:1600px;background: url("../images/escarapela1b.png") 95% 43px no-repeat fixed;}
+#bgt2{position: absolute;top: 0;left: 0;width:1920px;height:1600px;background: url("../images/placab.png") 50% 100px no-repeat fixed;}
+#bgt3{position: absolute;top: 0;left: 0;width:1920px;height:1600px;background: url("../images/placac.png") 50% 467px no-repeat fixed;}
+#bgt4{position: absolute;top: 0;left: 0;width: 1920px;height:1600px;background: url("../images/placad.png") 10% -77px no-repeat fixed;}
+.bloque-two article{color: #FFF;font-size: 170%;font-family: 'Bubblegum Sans', arial, serif;line-height: 100% !important;text-align: center;font-size-adjust: 0;font-weight: normal !important;font-style: normal;position: absolute;top:30%;left:30%;130px;width: 900px;height: 300px;z-index: 99999;letter-spacing: +1px;}
+.bloque-two p{color: #FFF;font-size: 60%;font-family: 'Cabin', arial, serif;text-align: center;line-height: 130% !important;position: absolute;top:105px;width: 900px;height: 200px;z-index: 99999;letter-spacing: +1px;}
+
+.bloque-two h2 {color: #444;font-size: 185%;font-family: 'Bubblegum Sans', arial, serif;line-height: 100% !important;text-align: center;font-size-adjust: 0;font-weight: normal !important;font-style: normal;position: absolute;top: 26px;width: 900px;height: 300px;z-index: 99999;}
+.bloque-two h3 {color: #444;font-size:60%;font-family: 'Cabin', arial, serif;text-align: center;line-height: 180% !important;position: absolute;top: 76px;width: 900px;height: 300px;z-index: 99999;letter-spacing: +1px;}
