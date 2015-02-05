@@ -1,0 +1,151 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+	    <title>drag-clone</title> 
+	    <style>
+	    	*{
+	    		text-decoration: none;
+	    		list-style-type: none;
+	    		margin: 0;
+	    		padding: 0;
+	    	}
+			.content{
+				position: absolute;
+				width: 100px;
+				height: 50px;
+				border:1px solid #ccc;
+			}
+			.oTemp{
+				position: absolute;
+				width: 100px;
+				height: 50px;
+				border:1px solid #ccc;
+			}
+			.slide{
+				position: relative;
+				width: 550px;
+				height: 104px;
+				border:1px solid #ccc;
+				overflow: hidden;
+			}
+			.slide ul{
+				position: absolute;
+			}
+			.slide li{
+				float: left;
+				width: 100px;
+				height: 100px;
+				padding:5px;
+
+			}
+			.slide li img{
+				width: 82px;
+				height: 82px;
+			}
+	    </style>
+	</head>
+	<body>
+	    <div class="content elm">
+	    	<h1></h1>
+	    	<div class="Center elm"></div>
+	    </div>
+	    <script>
+	    (function(){
+	    	function Drag (){
+	    		var _this = this;
+	    		//克隆拖拽
+	    		var dragElm = this.getClassName(document,'content')[0];
+	    		this.dragElm = dragElm;
+	    		this.init();
+
+	    	}
+	    	Drag.prototype = {
+	    		getClassName : function(parentElm,cls){
+	    			var arr = [],
+	    			that = this,
+	    			dom = parentElm.getElementsByTagName('*');
+	    			for(var i=0;i<dom.length;i++){
+	    				if(dom[i].className.search(cls) !=-1){
+	    					arr.push(dom[i]);
+	    				}
+	    			}
+    				return arr;
+	    		},
+	    		hasClass : function (elm,cls){
+	    			if(elm.className.search(cls) != -1){
+	    				return elm;
+	    			}
+	    		},
+	    		addClass :function(elm,cls){
+	    			var that = this;
+	    			var has = that.hasClass(elm,cls);
+	    			if(has){
+	    				return;
+	    			}
+	    			elm.className = elm.className + ' '+ cls;
+	    		},
+	    		removeClass : function(elm,cls){
+	    			var that = this;
+	    			var has = that.hasClass(elm,cls);
+	    			var arr  = elm.className.split(' ');
+	    			if(!has){
+	    				return;
+	    			}
+	    			for(var i=0;i<arr.length;i++){
+	    				if(arr[i]  == cls){
+	    					elm.className = elm.className.replace(' '+ arr[i],"");
+	    				}
+	    			}
+
+	    		},
+	    		preventEvent : function(event){
+	    			var event = event || window.event;
+	    		},
+	    		init : function(){
+	    			var that = this,
+	    			disX = 0,
+	    			disY = 0,
+	    			iL = 0,
+	    			iT = 0,
+	    			pos = {x:0,y:0},
+	    			drag = false;
+
+	    			that.dragElm.onmousedown = function(event){
+	    				var event  = event || window.event,
+	    				cloneDiv = document.createElement('div');
+	    				cloneDiv.className = 'oTemp';
+	    				drag = true;
+	    				disX = event.clientX - this.offsetLeft;
+	    				disY = event.clientY - this.offsetTop;
+	    				cloneDiv.style.left = this.style.left;
+	    				cloneDiv.style.top = this.style.top;
+	    				document.body.appendChild(cloneDiv);
+		    			document.onmousemove = function(event){
+		    				if(!drag){
+		    					return;
+		    				}
+		    				var iL = event.clientX - disX;
+		    				var iT = event.clientY - disY;
+		    				cloneDiv.style.left = iL + 'px';
+		    				cloneDiv.style.top = iT + 'px';
+		    				pos = {x:iL,y:iT};
+		    				return false;
+		    			};
+		    			document.onmouseup = function(event){
+		    				document.onmousemove = null;
+		    				document.onmouseup = null;
+		    				that.dragElm.style.left = cloneDiv.style.left;
+		    				that.dragElm.style.top = cloneDiv.style.top;
+		    				document.body.removeChild(cloneDiv);
+		    				drag = false;
+		    			}
+	    			}
+	    		}
+	    	}
+	    	var drag = new Drag();
+	    }())
+	    </script>
+	</body>
+</html>

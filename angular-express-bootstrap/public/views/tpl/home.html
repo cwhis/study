@@ -1,0 +1,15 @@
+<header ng-controller="homeCtrl">
+    <h3>Welcome <b><a href="javascript:;">admin</a></b> to My Tech Space</h3>
+    <br>
+    <a claa="btn" href="index.html" class="text-right">退出</a>
+</header>
+<div class="bubble">
+    <div class="markdown-area">
+        <article class="markdown-body">
+            <h2>Simple Demos</h2>
+            <ul>
+                <li ng-repeat="list in lists"><a href="views/slide/{{list.id}}.html">{{list.snippet}}</a></li>
+            </ul>
+        </article>
+    </div>
+</div>
