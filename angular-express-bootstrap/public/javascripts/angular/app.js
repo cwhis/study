@@ -3,15 +3,15 @@ var app = angular.module('app', ['ngRoute']);
 app.config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
     $routeProvider
         .when('/', {
-        	templateUrl: '/views/tpl/production.html', 
+        	templateUrl: 'views/tpl/production.html', 
         	controller: 'WelcomeCtrl'
         })
         .when('/login',{
-        	templateUrl: '/views/tpl/login.html',
+        	templateUrl: 'views/tpl/login.html',
         	controller: 'loginCtrl'
         })
         .when('/home',{
-        	templateUrl: '/views/tpl/home.html',
+        	templateUrl: 'views/tpl/home.html',
         	controller: 'homeCtrl'
         })
         .otherwise({redirectTo: '/'});
