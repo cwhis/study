@@ -1,0 +1,38 @@
+<form name="signUpForm" action="/signup" method="POST" class="signup-form" novalidate>
+    <div class="signup-form-header">
+        <h1>注册新用户</h1>
+        <a href="/login">登录</a>
+    </div>
+
+    <div class="signup-form-body">
+        <label for="mobile">手机号</label>
+        <input phonenum-validation class="input-block" name="mobile" type="number" ng-model="mobile" required />
+        <p>{{signUpFrom.mobile.$error.errorMatch}}</p>
+        <p>{{isMatch}}</p>
+        <p ng-show="signUpForm.mobile.$error.match">
+            手机号码格式不正确
+        </p>
+
+        <label for="emal">邮箱</label>
+        <input class="input-block" name="email" type="email" ng-model="email" />
+        <p ng-show="signUpForm.email.$dirty && signUpForm.email.$invalid">
+            邮箱地址格式不正确
+        </p>
+        <p ng-show="signUpForm.email.$dirty && signUpForm.email.$error.emailAlreadyRegistered">
+            邮箱地址已经被注册
+        </p>
+
+        <label for="password">密码</label>
+        <input class="input-block" name="password" type="password" ng-model="password" required/>
+        <label for="confirmPassword">确认密码</label>
+        <input class="input-block" compare-to="password" name="confirmPassword" type="password" ng-model="confirmPassword" required/>
+        <p class="warning" ng-show="signUpForm.confirmPassword.$dirty && signUpForm.confirmPassword.$error.errorCompareTo">
+            请必须和上面密码保持一致
+        </p>
+
+        <label>邀请码</label>
+        <input class="input-block" name="invitation_code" type="text" ng-model="invitation_code" required/>
+
+        <input class="button" type="submit" value="注册" ng-click="signup()">
+    </div>
+</form>
