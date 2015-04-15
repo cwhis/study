@@ -2,43 +2,76 @@
 <html>
 	<head>
 		<meta charset="utf-8"/>
-		<title>图片放大缩小</title>
+		<title>缓冲运动示例</title>
 		<link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+		<style>
+			body{margin:0;}
+			#demo{width: 200px;height: 100px;position: absolute;left: 0;top: 0;background-color: #f05b68;filter:alpha('opacity:30');opacity: 0.3;border:2px solid #ccc;}
+		</style>
 	</head>
 	<body>
-		<div class="content">
-			<img width="372" height="165" src="../images/01.jpg" id="img" alt="图片"><input type="button" id="max" value="放大"/>
-		</div>
+		<div id="demo"></div>
 		<script>
 			(function(){
-				var oBigDiv = document.getElementById('max'),
-					oSmallDiv = document.getElementById('min');
-					oImg = document.getElementById('img');
-					oBigDiv.onclick = function(){
-						maxFun(true);
-					}
-					var maxWidth = oImg.width*2,//极限宽度
-					maxHeight = oImg.height*2;//极限高度
-					function maxFun(flag){
-						clearInterval(timer);
-						var endWidth = oImg.width*1.1,//每次点击后的宽度
-						endHeight = oImg.height*1.1;//每次点击后的高度
-						var timer = setInterval(function(){
-							var scale = (oImg.width/oImg.height)/2;
-							if(oImg.width<endWidth || oImg.height<endHeight){
-								if(oImg.width<maxWidth||oImg.height<maxHeight){
+				function Init (){
+					var oDiv = document.getElementById('demo');
+					this.oDiv = oDiv;
+					this.share();
 
-									oImg.width = oImg.width*scale;
-									oImg.height = oImg.height*scale;
+				}
+				Init.prototype = {
+					share : function(){
+						var that = this;
+						that.oDiv.onmouseover = function(){
+							that.startMove(this,{'width':400,'height':200,'opacity':100});
+						}
+						that.oDiv.onmouseout = function(){
+							that.startMove(this,{'width':200,'height':100,'opacity':30});
+						}
+					},
+					getStyle : function(obj,attr){
+						if(obj.currentStyle){
+							return obj.currentStyle[attr];
+						}else{
+							return getComputedStyle(obj,false)[attr];
+						}
+					},
+					startMove : function(obj,options,fn){
+						//options = {attr:iTarget}
+						var that = this,
+						speed = 0,//变化的速度
+						flag = true;
+						clearInterval(obj.timer);
+						obj.timer = setInterval(function(){
+							for(var attr in options){
+								var oCur = 0;
+								if(attr == 'opacity'){
+									oCur = Math.round(parseFloat(that.getStyle(obj,attr))*100);
 								}else{
-									clearInterval(timer);
-									alert("已经达到最大值")
+									oCur = parseInt(that.getStyle(obj,attr));
 								}
-							}else{
-								clearInterval(timer);
+								speed = (options[attr] - oCur)/20;
+								speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+								if(oCur != options[attr]){
+									flag = false;
+								}
+								if(attr == 'opacity'){
+									obj.style.filter = 'alpha(opacity:'+oCur +speed+')';
+									obj.style.opacity = (oCur+speed)/100;
+								}else{
+									obj.style[attr] = oCur + speed + 'px';
+								}
+								if(flag){
+									if(fn){
+										fn()
+									}
+								}
 							}
-						},20);
+						},30);
+
 					}
+				}
+				var init = new Init();
 			}());
 		</script>
 	</body>

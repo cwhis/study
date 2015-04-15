@@ -1,79 +1,69 @@
-<!DOCTYPE>
-<html>
-	<head>
-		<meta charset="utf-8"/>
-		<title>缓冲运动示例</title>
-		<link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
-		<style>
-			body{margin:0;}
-			#demo{width: 200px;height: 100px;position: absolute;left: 0;top: 0;background-color: #f05b68;filter:alpha('opacity:30');opacity: 0.3;border:2px solid #ccc;}
-		</style>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	    <title>缓冲运动示例一</title> 
+	    <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon">
+	    <style type="text/css">
+			*{margin:0;padding: 0;}
+			#demo{
+				width: 200px;
+				height: 200px;
+				background-color: #f0f0f0;
+				position: absolute;
+				left:-200px;
+				top: 0;
+			}
+			span{
+				position: absolute;
+				left: 200px;
+				width: 20px;
+				height: 200px;
+				line-height: 100px;
+				color: #fff;
+				background-color: blue;
+				font:14px/16px bold "微软雅黑" #333;
+			}
+	    </style>
 	</head>
 	<body>
-		<div id="demo"></div>
-		<script>
-			(function(){
-				function Init (){
-					var oDiv = document.getElementById('demo');
-					this.oDiv = oDiv;
-					this.share();
-
-				}
-				Init.prototype = {
-					share : function(){
-						var that = this;
-						that.oDiv.onmouseover = function(){
-							that.startMove(this,{'width':400,'height':200,'opacity':100});
-						}
-						that.oDiv.onmouseout = function(){
-							that.startMove(this,{'width':200,'height':100,'opacity':30});
-						}
-					},
-					getStyle : function(obj,attr){
-						if(obj.currentStyle){
-							return obj.currentStyle[attr];
-						}else{
-							return getComputedStyle(obj,false)[attr];
-						}
-					},
-					startMove : function(obj,options,fn){
-						//options = {attr:iTarget}
-						var that = this,
-						speed = 0,//变化的速度
-						flag = true;
-						clearInterval(obj.timer);
-						obj.timer = setInterval(function(){
-							for(var attr in options){
-								var oCur = 0;
-								if(attr == 'opacity'){
-									oCur = Math.round(parseFloat(that.getStyle(obj,attr))*100);
-								}else{
-									oCur = parseInt(that.getStyle(obj,attr));
-								}
-								speed = (options[attr] - oCur)/20;
-								speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
-								if(oCur != options[attr]){
-									flag = false;
-								}
-								if(attr == 'opacity'){
-									obj.style.filter = 'alpha(opacity:'+oCur +speed+')';
-									obj.style.opacity = (oCur+speed)/100;
-								}else{
-									obj.style[attr] = oCur + speed + 'px';
-								}
-								if(flag){
-								console.log(flag)
-									if(fn){
-										fn()
-									}
-								}
-							}
-						},30);
-
-					}
-				}
-				var init = new Init();
-			}());
-		</script>
+	    <div id="demo" style="left:-200px;">
+    		<span>分享</span>
+	    </div>
+    	<script>
+    		(function(){
+    			var oDiv = document.getElementById("demo");
+    			var oSpan = document.getElementsByTagName('span')[0];
+    			oDiv.onmouseover = function(){
+    				startMove(this,0);
+    			}
+    			oDiv.onmouseout = function(){
+    				startMove(this,-200);
+    			}
+    			var timer = null,
+				speed = 0,
+    			flag = true;
+    			function startMove (obj,iTarget){
+    				clearInterval(timer);
+    				timer = setInterval(function(){
+    					var oStyle = parseInt(getStyle(obj,'left'));
+    					speed = (iTarget - oStyle)/20;
+    					speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+    					if(oStyle != iTarget){
+    						obj.style.left = oStyle + speed + 'px';
+    					}else{
+    						clearInterval(timer);
+    					}
+    				},30);
+    			}
+    			function getStyle(obj,attr){
+    				if(obj.currentStyle){
+    					return obj.currentStyle[attr];
+    				}else{
+    					return getComputedStyle(obj,false)[attr];
+    				}
+    			}
+    		}());
+    	</script>
 	</body>
 </html>
